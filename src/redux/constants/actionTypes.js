@@ -1,0 +1,18 @@
+export const LOAD_USERS = "LOAD_USERS_START"
+export const LOAD_USERS_SUCCESS = "LOAD_USERS_SUCCESS"
+export const LOAD_USERS_ERROR = "LOAD_USERS_ERROR"
+
+export const CREATE_USER = "CREATE_USER_START"
+export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS"
+export const CREATE_USER_ERROR = "CREATE_USER_SUCCESS"
+
+export const LOGIN_USER = "LOGIN_USER_START"
+export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS"
+export const LOGIN_USER_ERROR = "LOGIN_USER_SUCCESS"
+
+export const LOGOUT_USER_SUCCESS = "LOGOUT_USER_SUCCESS"
+
+export const GET_ACTIVE_USER = "GET_ACTIVE_USER"
+
+export const PASSWORD_REGEX = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$"
+
