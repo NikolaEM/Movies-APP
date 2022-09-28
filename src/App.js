@@ -5,8 +5,9 @@ import {
 import './App.css';
 import NavBar from "./components/NavBar";
 import Register from './views/AuthViews/Register';
-import Login from './views/AuthViews/Login'
-import  GuestRoute  from "./components/routes/GuestRoute";
+import  Login  from './views/AuthViews/Login'
+import  PublicRoute  from "./components/routes/PublicRoute";
+import { ROUTE } from "./views/routes";
 
 
 function App() {
@@ -14,12 +15,12 @@ function App() {
    <Router>
     <NavBar />
     <Switch>
-    <GuestRoute exact path="/register">
+    <PublicRoute exact path={ROUTE.REGISTER}>
             <Register />
-    </GuestRoute>
-    <GuestRoute exact path="/login">
+    </PublicRoute>
+    <PublicRoute exact path={ROUTE.LOGIN}>
             <Login />
-    </GuestRoute>
+    </PublicRoute>
     </Switch>
    </Router>
   );

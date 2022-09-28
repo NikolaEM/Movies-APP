@@ -7,6 +7,7 @@ import {
     fork, 
     delay,
 } from "redux-saga/effects";
+import { push } from 'react-router-redux';  
 import { 
     loadUsersSuccess, 
     loadUsersError, 
@@ -17,6 +18,9 @@ import {
     logoutUserSuccess
 } from "../actions/AuthActions";
 import authService from "../../services/AuthAPI/AuthService";
+import { useHistory } from "react-router-dom";
+
+const History = () => useHistory()
 
 export function* onLoadUsersStart(){
     try{
@@ -25,6 +29,7 @@ export function* onLoadUsersStart(){
             yield delay(500)
             yield put(loadUsersSuccess(response.data));
         }
+        History().push("/")
     } catch (error) {
         yield put(loadUsersError(error.response.data));
     }
@@ -33,9 +38,8 @@ export function* onLoadUsersStart(){
 export function* onCreateUserStart(action){
     try{
         const response = yield call(authService.createUserApi, action.payload);
-        if (response.status === 200){
             yield put(createUserSuccess(response.data));
-        }
+            yield put(push('/login'));
     } catch (error) {
         yield put(createUserError(error.response.data));
     }
@@ -43,10 +47,9 @@ export function* onCreateUserStart(action){
 
 export function* onLoginUserStart(action){
     try{
-        const response = yield call(authService.loginUserApi, action.payload); 
-        if (response.status === 200){
+        const response = yield call(authService.loginUserApi, action.payload);
             yield put(loginUserSuccess(response.data));
-        }
+            yield put(push('/'));
     } catch (error) {
         yield put(loginUserError(error.response.data));
     }
@@ -54,10 +57,8 @@ export function* onLoginUserStart(action){
 
 export function* onLogoutUserStart(){
     try{
-        const response = yield call(authService.logoutUserApi);
-        if (response.status === 200){
-            yield put(logoutUserSuccess())
-        }
+        yield call(authService.logoutUserApi);
+        yield put(logoutUserSuccess())
     }catch {}
 }
 

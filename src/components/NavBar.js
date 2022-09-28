@@ -10,7 +10,6 @@ export default function Navbar() {
   const isAuthenticated = useSelector(makeSelectIsAuthenticated());
 
   function handleLogout(e) {
-      e.preventDefault();
       dispatch(logoutUserSuccess())
     }
   
