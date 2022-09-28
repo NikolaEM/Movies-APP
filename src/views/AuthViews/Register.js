@@ -1,12 +1,12 @@
 import { Formik, Field, Form } from 'formik';
 import { useDispatch } from "react-redux";
-import { createUserStart } from "../../redux/actions/AuthActions";
+import { createUser} from "../../redux/actions/AuthActions";
 import { registerSchema } from "../validation/AuthValidation";
 
 const Register = () => {
   const dispatch = useDispatch();
   const OnSubmit = ( values) => {
-    dispatch(createUserStart(values))
+    dispatch(createUser(values))
   }  
   return(
   <>

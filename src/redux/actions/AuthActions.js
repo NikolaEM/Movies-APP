@@ -1,7 +1,7 @@
 import * as types from "../constants/actionTypes"
 
 export const loadUsers = () => ({
-    type: types.LOAD_USERS_START,
+    type: types.LOAD_USERS,
 });
 
 export const loadUsersSuccess = (user) => ({
@@ -14,8 +14,8 @@ export const loadUsersError = (error) => ({
     payload: error
 });
 
-export const createUserStart = (user) => ({
-    type: types.CREATE_USER_START,
+export const createUser = (user) => ({
+    type: types.CREATE_USER,
     payload: user
 });
 
@@ -28,9 +28,9 @@ export const createUserError = (error) => ({
     payload: error
 });
 
-export const loginUserStart = (user) => {
+export const loginUser = (user) => {
     return {
-    type: types.LOGIN_USER_START,
+    type: types.LOGIN_USER,
     payload: user}
 };
 

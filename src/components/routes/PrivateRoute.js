@@ -5,7 +5,6 @@ import { makeSelectIsAuthenticated } from "../../redux/selectors/AuthSelectors";
 
 export default function PrivateRoute({ children, ...props }) {
   const isAuthenticated = useSelector(makeSelectIsAuthenticated);
-console.log("props", props)
   return (
     <Route {...props}>
       {!isAuthenticated ? children : <Redirect to="/" />}

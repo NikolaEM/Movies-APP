@@ -7,7 +7,7 @@ import {
     fork, 
     delay,
 } from "redux-saga/effects";
-import { push } from 'react-router-redux';  
+import { push } from "connected-react-router"; 
 import { 
     loadUsersSuccess, 
     loadUsersError, 
@@ -18,24 +18,20 @@ import {
     logoutUserSuccess
 } from "../actions/AuthActions";
 import authService from "../../services/AuthAPI/AuthService";
-import { useHistory } from "react-router-dom";
 
-const History = () => useHistory()
-
-export function* onLoadUsersStart(){
+export function* onLoadUsers(){
     try{
         const response = yield call(authService.loadUsersApi);
         if (response.status === 200){
             yield delay(500)
             yield put(loadUsersSuccess(response.data));
         }
-        History().push("/")
     } catch (error) {
         yield put(loadUsersError(error.response.data));
     }
 }   
 
-export function* onCreateUserStart(action){
+export function* onCreateUser(action){
     try{
         const response = yield call(authService.createUserApi, action.payload);
             yield put(createUserSuccess(response.data));
@@ -45,7 +41,7 @@ export function* onCreateUserStart(action){
     }
 }
 
-export function* onLoginUserStart(action){
+export function* onLoginUser(action){
     try{
         const response = yield call(authService.loginUserApi, action.payload);
             yield put(loginUserSuccess(response.data));
@@ -55,34 +51,34 @@ export function* onLoginUserStart(action){
     }
 }
 
-export function* onLogoutUserStart(){
+export function* onLogoutUser(){
     try{
         yield call(authService.logoutUserApi);
         yield put(logoutUserSuccess())
     }catch {}
 }
 
-export function* onLoadUsers(){
-     yield takeEvery(types.LOAD_USERS_START, onLoadUsersStart);
+export function* watchOnLoadUsers(){
+     yield takeEvery(types.LOAD_USERS, onLoadUsers);
  }
 
- export function* onCreateUser(){
-    yield takeEvery(types.CREATE_USER_START, onCreateUserStart);
+ export function* watchOnCreateUser(){
+    yield takeEvery(types.CREATE_USER, onCreateUser);
 }
 
-export function* onLoginUser(){
-    yield takeEvery(types.LOGIN_USER_START, onLoginUserStart);
+export function* watchOnLoginUser(){
+    yield takeEvery(types.LOGIN_USER, onLoginUser);
 }
 
-export function* onLogoutUser(){
-    yield takeEvery(types.LOGOUT_USER_SUCCESS, onLogoutUserStart)
+export function* watchOnLogoutUser(){
+    yield takeEvery(types.LOGOUT_USER_SUCCESS, onLogoutUser)
 }
 
 export default function* authSaga(){
     yield all([
-       fork(onLoadUsers),
-       fork(onCreateUser),
-       fork(onLoginUser),
-       fork(onLogoutUser),
+       fork(watchOnLoadUsers),
+       fork(watchOnCreateUser),
+       fork(watchOnLoginUser),
+       fork(watchOnLogoutUser),
     ])
 }

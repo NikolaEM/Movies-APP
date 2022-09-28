@@ -8,12 +8,12 @@ import * as types from "../constants/actionTypes"
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case types.LOAD_USERS_START:
-        case types.CREATE_USER_START:
+        case types.LOAD_USERS:
+        case types.CREATE_USER:
             return {
                 ...state,
             };
-        case types.LOGIN_USER_START:
+        case types.LOGIN_USER:
             return {
                 ...state,
                 users: action.payload,
