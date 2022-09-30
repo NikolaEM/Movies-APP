@@ -42,6 +42,7 @@ const authReducer = (state = initialState, action) => {
             }
         case types.GET_ACTIVE_USER:
             return {
+                ...state,
                 isAuthenticated: true,
                 user: action.user
             }

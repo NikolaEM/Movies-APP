@@ -51,6 +51,15 @@ export function* onLoginUser(action){
     }
 }
 
+export function* getActiveUser(){
+    try{
+        const response = yield call(authService.getActiveUser)
+        yield put(getActiveUser(response.data))
+    }catch (error) {
+        console.log("Session expired");
+    }
+}
+
 export function* onLogoutUser(){
     try{
         yield call(authService.logoutUserApi);
@@ -74,11 +83,16 @@ export function* watchOnLogoutUser(){
     yield takeEvery(types.LOGOUT_USER_SUCCESS, onLogoutUser)
 }
 
+export function* watchGetActiveUser(){
+    yield takeEvery(types.GET_ACTIVE_USER, getActiveUser)
+}
+
 export default function* authSaga(){
     yield all([
        fork(watchOnLoadUsers),
        fork(watchOnCreateUser),
        fork(watchOnLoginUser),
        fork(watchOnLogoutUser),
+       fork(watchGetActiveUser),
     ])
 }

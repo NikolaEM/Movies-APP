@@ -24,10 +24,16 @@ export default function Navbar() {
             ) : (
               <h3 style={{ color: "red" }}>Guest</h3>
             )}
-          {isAuthenticated ? (
+          {isAuthenticated ? (<>
+            <li>
+               <Link className="nav-link" to="/movies/create">
+                 Create Movie
+               </Link>
+              </li>
               <button className="btn btn-secondary" onClick={handleLogout}>
                 Logout
               </button>
+              </>
            ) : ( 
             <>
               <li className="nav-item active">
@@ -40,6 +46,7 @@ export default function Navbar() {
                   Register
                 </Link>
               </li>
+              
             </>
            )}
         </ul>
