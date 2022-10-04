@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { makeSelectIsAuthenticated } from "../redux/selectors/AuthSelectors"
 import { logoutUserSuccess } from "../redux/actions/AuthActions";
+import { ROUTE } from "../views/routes";
 
 export default function Navbar() {
 
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(makeSelectIsAuthenticated());
 
-  function handleLogout(e) {
+  function handleLogout() {
       dispatch(logoutUserSuccess())
     }
   
@@ -25,11 +26,11 @@ export default function Navbar() {
               <h3 style={{ color: "red" }}>Guest</h3>
             )}
           {isAuthenticated ? (<>
-            <li>
+          
                <Link className="nav-link" to="/movies/create">
                  Create Movie
                </Link>
-              </li>
+           
               <button className="btn btn-secondary" onClick={handleLogout}>
                 Logout
               </button>
@@ -37,12 +38,12 @@ export default function Navbar() {
            ) : ( 
             <>
               <li className="nav-item active">
-                <Link className="nav-link" to="/login">
+                <Link className="nav-link" to={ROUTE.LOGIN}>
                   Login
                 </Link>
               </li>
               <li className="nav-item active">
-                <Link className="nav-link" to="/register">
+                <Link className="nav-link" to={ROUTE.REGISTER}>
                   Register
                 </Link>
               </li>

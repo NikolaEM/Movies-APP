@@ -4,6 +4,7 @@ import * as types from "../constants/actionTypes"
         users: [],
         activeUser: null,
         isAuthenticated: !!localStorage.getItem("token"),
+        errors: false 
    }
 
 const authReducer = (state = initialState, action) => {
@@ -36,9 +37,10 @@ const authReducer = (state = initialState, action) => {
         case types.LOAD_USERS_ERROR:
         case types.CREATE_USER_ERROR:
         case types.LOGIN_USER_ERROR:
+        case types.GET_ACTIVE_USER_ERROR:
             return {
                 ...state,
-                error: action.payload
+                errors: action.payload
             }
         case types.GET_ACTIVE_USER:
             return {
@@ -48,6 +50,7 @@ const authReducer = (state = initialState, action) => {
             }
         case types.LOGOUT_USER_SUCCESS:
             return {
+               
                 activeUser: null,
                 isAuthenticated: false
                }

@@ -1,14 +1,27 @@
 import { Formik, Field, Form } from 'formik';
-import { useDispatch } from "react-redux";
-import { createMovie } from '../../redux/actions/MoviesActions';
-import { MOVIE_GENRES } from '../../redux/constants/MovieActionTypes';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { createMovie, loadGenres } from '../../redux/actions/MoviesActions';
 import { createMovieSchema } from '../validation/MoviesValidation';
 
 const CreateMovie = () => {
     const dispatch = useDispatch();
-    const OnSubmit = ( values) => {
-      dispatch(createMovie(values))
+    const genres = useSelector(state => state.movies.genres);
+    const [movieCover, setMovieCover] = useState(null);
+
+    const onSubmit = (values) => {
+    const formData = new FormData();
+    formData.append("title", values?.title);
+    formData.append("description", values?.description);
+    formData.append("movie_cover", movieCover);
+    const genreId = parseInt(values?.genre)
+    formData.append("genre", genreId);
+    dispatch(createMovie(formData))
     }
+  useEffect(() => {
+      dispatch(loadGenres())
+  }, [])
 
     return(
     <>
@@ -18,12 +31,12 @@ const CreateMovie = () => {
           title: '',
           description: '',
           movie_cover: '',
-          genre: '',
+          genre: 1,
         }}
         validationSchema={createMovieSchema} 
-        onSubmit={OnSubmit} 
+        onSubmit={onSubmit}
       >
-        <Form>
+        <Form >
           <Field 
           id="title" 
           name="title" 
@@ -42,20 +55,25 @@ const CreateMovie = () => {
           <label>  Cover Image </label>
           <Field 
             id="movie_cover" 
-            name="movie_cover" 
-            type="file"
-            accept="image/png, image/jpeg"
-          />
+            name="movie_cover"
+            type="text"
+            >
+              {() => (
+            <input 
+              className="form-control"
+              type="file"
+              name={"movie_cover"}
+              onChange={(e) =>
+               setMovieCover(e.target.files[0])
+              }
+            />
+            )}
+            </Field>
           <br></br>
-
-          <Field name="genre" component="select" placeholder="Select genre">
-            { Object.keys(MOVIE_GENRES).map((genre) => {
-            return (
-              <option key={genre} value={genre}>
-                {MOVIE_GENRES[genre]}
-              </option>
-            );
-          })}
+          <Field name="genre" component="select" placeholder="Select genre" >
+          {genres.map((genre, id) => (
+            <option key={genre.id} value={genre.id}> {genre.name} </option>
+          ))}
           </Field>
 
            <button type="submit" > Create Movie </button> 

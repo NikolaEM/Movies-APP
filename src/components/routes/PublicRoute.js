@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import { makeSelectIsAuthenticated } from "../../redux/selectors/AuthSelectors";
 import { useSelector } from "react-redux";
+import { ROUTE } from "../../views/routes";
 
 
 function PublicRoute({ children, ...rest }) {
@@ -19,9 +20,7 @@ function PublicRoute({ children, ...rest }) {
             children
           ) : (
             <Redirect
-              to={{
-                pathname: '/home',
-              }}
+              to={ROUTE.DEFAULT}
             />
           ))
       }

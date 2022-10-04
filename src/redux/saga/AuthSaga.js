@@ -15,9 +15,11 @@ import {
     createUserError, 
     loginUserSuccess, 
     loginUserError, 
-    logoutUserSuccess
+    logoutUserSuccess,
+    getActiveUserError
 } from "../actions/AuthActions";
 import authService from "../../services/AuthAPI/AuthService";
+import { ROUTE } from "../../views/routes";
 
 export function* onLoadUsers(){
     try{
@@ -35,7 +37,7 @@ export function* onCreateUser(action){
     try{
         const response = yield call(authService.createUserApi, action.payload);
             yield put(createUserSuccess(response.data));
-            yield put(push('/login'));
+            yield put(push(ROUTE.LOGIN));
     } catch (error) {
         yield put(createUserError(error.response.data));
     }
@@ -45,18 +47,20 @@ export function* onLoginUser(action){
     try{
         const response = yield call(authService.loginUserApi, action.payload);
             yield put(loginUserSuccess(response.data));
-            yield put(push('/'));
+            if(response.status === 200){
+            yield put(push(ROUTE.DEFAULT));
+            }
     } catch (error) {
         yield put(loginUserError(error.response.data));
     }
 }
 
-export function* getActiveUser(){
+export function* setActiveUser(){
     try{
         const response = yield call(authService.getActiveUser)
-        yield put(getActiveUser(response.data))
+        yield put(setActiveUser(response.data))
     }catch (error) {
-        console.log("Session expired");
+        yield put(getActiveUserError(error.response.data))
     }
 }
 
@@ -83,8 +87,8 @@ export function* watchOnLogoutUser(){
     yield takeEvery(types.LOGOUT_USER_SUCCESS, onLogoutUser)
 }
 
-export function* watchGetActiveUser(){
-    yield takeEvery(types.GET_ACTIVE_USER, getActiveUser)
+export function* getActiveUser(){
+    yield takeEvery(types.GET_ACTIVE_USER, setActiveUser)
 }
 
 export default function* authSaga(){
@@ -93,6 +97,6 @@ export default function* authSaga(){
        fork(watchOnCreateUser),
        fork(watchOnLoginUser),
        fork(watchOnLogoutUser),
-       fork(watchGetActiveUser),
+       fork(getActiveUser),
     ])
 }
