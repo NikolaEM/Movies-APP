@@ -1,43 +1,65 @@
-import HttpService from "../HttpService";
+import ApiService from "../ApiService";
 
-class AuthService extends HttpService{
+const ENDPOINTS = {
+  GET_USERS: "/users/",
+  REGISTER: "/users/",
+  LOGIN: "/token/",
+  LOGOUT: "/logout",
+  ACTIVE_USER: "/users/me/",
+};
 
-   getToken(){
-    localStorage.getItem("token")
+class AuthService extends ApiService {
+  constructor() {
+    super();
+    this.setAuthorizationHeader();
   }
 
   setAuthorizationHeader = () => {
-    const token = this.getToken()
+    const token = this.getToken();
     if (token) {
-      this.attachHeaders({
+      this.api.attachHeaders({
         Authorization: `Bearer ${token}`,
       });
     }
   };
 
- loadUsersApi = async () => {
-  const  data  = await this.client.get("/users/");
-  return data;
-};
+  removeHeaders(headerKeys) {
+    headerKeys.forEach((key) => delete this.client.defaults.headers[key]);
+  }
 
- createUserApi = async (userData) => {
-  const data = await this.client.post("/users/", userData);
-  localStorage.setItem("token", data.data.access);
-  return data;
-};
+  getToken = () => {
+    return localStorage.getItem("token");
+  };
 
-loginUserApi = async (credentials) => {
-  const  data  = await this.client.post("/token/", credentials);
-  localStorage.setItem("token", data.data.access);
-  localStorage.setItem("token", data.data.refresh);
-  this.setAuthorizationHeader();
-  return data;
-};
+  loadUsersApi = async () => {
+    const data = await this.client.get(`${ENDPOINTS.GET_USERS}`);
+    return data;
+  };
 
-logoutUserApi = async () => {
-  localStorage.removeItem("token");
-  await this.client.post("/logout");
-};
+  createUserApi = async (userData) => {
+    const data = await this.client.post(`${ENDPOINTS.REGISTER}`, userData);
+    localStorage.setItem("token", data.data.access);
+    return data;
+  };
+
+  loginUserApi = async (credentials) => {
+    const data = await this.client.post(`${ENDPOINTS.LOGIN}`, credentials);
+    localStorage.setItem("token", data.data.access);
+    this.setAuthorizationHeader();
+    return data;
+  };
+
+  logoutUserApi = async () => {
+    localStorage.removeItem("token");
+    await this.client.post(`${ENDPOINTS.LOGOUT}`);
+    this.removeHeaders();
+  };
+
+  getActiveUser = async () => {
+    const data = await this.client.get(`${ENDPOINTS.ACTIVE_USER}`);
+    return data;
+  };
 }
+
 const authService = new AuthService();
 export default authService;

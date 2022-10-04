@@ -52,3 +52,8 @@ export const getActiveUser = (user) => ({
     type: types.GET_ACTIVE_USER,
     payload: user
 });
+
+export const getActiveUserError = (error) => ({
+    type: types.GET_ACTIVE_USER_ERROR,
+    payload: error
+});
