@@ -1,7 +1,6 @@
-
 export const ROUTE = {
-    LOGIN: "/login",
-    REGISTER: "/register",
-    CREATE_MOVIE: "/movies/create",
-    DEFAULT: "/",
-}
+  LOGIN: "/login",
+  REGISTER: "/register",
+  CREATE_MOVIE: "/movies/create",
+  DEFAULT: "/",
+};

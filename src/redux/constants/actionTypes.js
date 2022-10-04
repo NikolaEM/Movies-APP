@@ -15,5 +15,3 @@ export const LOGOUT_USER_SUCCESS = "LOGOUT_USER_SUCCESS"
 export const GET_ACTIVE_USER = "GET_ACTIVE_USER"
 export const GET_ACTIVE_USER_ERROR = "GET_ACTIVE_USER_ERROR"
 
-export const PASSWORD_REGEX = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$"
-
