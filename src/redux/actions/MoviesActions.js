@@ -15,44 +15,44 @@ export const createMovieError = (error) => ({
 });
 
 export const getGenres = () => ({
-  type: types.LOAD_GENRES,
+  type: types.GET_GENRES,
 });
 
 export const setGenresSuccess = (data) => ({
-  type: types.LOAD_GENRES_SUCCESS,
+  type: types.SET_GENRES_SUCCESS,
   payload: data,
 });
 
 export const getGenresError = (error) => ({
-  type: types.LOAD_GENRES_ERROR,
+  type: types.GET_GENRES_ERROR,
   payload: error,
 });
 
 export const getMovies = () => ({
-  type: types.LOAD_MOVIES,
+  type: types.GET_MOVIES,
 });
 
 export const setMoviesSuccess = (data) => ({
-  type: types.LOAD_MOVIES_SUCCESS,
+  type: types.SET_MOVIES_SUCCESS,
   payload: data,
 });
 
 export const getMoviesError = (error) => ({
-  type: types.LOAD_MOVIES_ERROR,
+  type: types.GET_MOVIES_ERROR,
   payload: error,
 });
 
 export const getMovie = (payload) => ({
-  type: types.LOAD_MOVIE,
+  type: types.GET_MOVIE,
   payload,
 });
 
 export const setMovieSuccess = (data) => ({
-  type: types.LOAD_MOVIE_SUCCESS,
+  type: types.SET_MOVIE_SUCCESS,
   payload: data,
 });
 
 export const getMovieError = (error) => ({
-  type: types.LOAD_MOVIE_ERROR,
+  type: types.GET_MOVIE_ERROR,
   payload: error,
 });

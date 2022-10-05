@@ -55,15 +55,15 @@ export function* watchOnCreateMovie() {
 }
 
 export function* watchGetGenres() {
-  yield takeEvery(types.LOAD_GENRES, getGenres);
+  yield takeEvery(types.GET_GENRES, getGenres);
 }
 
 export function* watchGetMovies() {
-  yield takeEvery(types.LOAD_MOVIES, getMovies);
+  yield takeEvery(types.GET_MOVIES, getMovies);
 }
 
 export function* watchGetMovie() {
-  yield takeEvery(types.LOAD_MOVIE, getMovie);
+  yield takeEvery(types.GET_MOVIE, getMovie);
 }
 
 export default function* moviesSaga() {
