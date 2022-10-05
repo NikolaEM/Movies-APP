@@ -24,7 +24,10 @@ export default function Navbar() {
           )}
           {isAuthenticated ? (
             <>
-              <Link className="nav-link" to="/movies/create">
+              <Link className="nav-link" to={ROUTE.MOVIES}>
+                Movies
+              </Link>
+              <Link className="nav-link" to={ROUTE.CREATE_MOVIE}>
                 Create Movie
               </Link>
 

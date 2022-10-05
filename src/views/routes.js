@@ -3,4 +3,6 @@ export const ROUTE = {
   REGISTER: "/register",
   CREATE_MOVIE: "/movies/create",
   DEFAULT: "/",
+  MOVIES: "/movies/",
+  SINGLE_MOVIE: "/movies/:id",
 };
