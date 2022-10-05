@@ -2,7 +2,7 @@ import { Formik, Field, Form } from "formik";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createMovie, loadGenres } from "../../redux/actions/MoviesActions";
+import { createMovie, getGenres } from "../../redux/actions/MoviesActions";
 import { createMovieSchema } from "../validation/MoviesValidation";
 
 const CreateMovie = () => {
@@ -19,7 +19,7 @@ const CreateMovie = () => {
     dispatch(createMovie(formData));
   };
   useEffect(() => {
-    dispatch(loadGenres());
+    dispatch(getGenres());
   }, []);
 
   return (

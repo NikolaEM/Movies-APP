@@ -16,6 +16,8 @@ const moviesReducer = (state = initialState, action) => {
         movie: action.payload,
       };
     case types.LOAD_GENRES:
+    case types.LOAD_MOVIES:
+    case types.LOAD_MOVIE:
       return {
         ...state,
       };
@@ -28,8 +30,20 @@ const moviesReducer = (state = initialState, action) => {
         ...state,
         genres: action.payload,
       };
+    case types.LOAD_MOVIES_SUCCESS:
+      return {
+        ...state,
+        movies: action.payload,
+      };
+    case types.LOAD_MOVIE_SUCCESS:
+      return {
+        ...state,
+        movie: action.payload,
+      };
     case types.CREATE_MOVIE_ERROR:
     case types.LOAD_GENRES_ERROR:
+    case types.LOAD_MOVIES_ERROR:
+    case types.LOAD_MOVIE_ERROR:
       return {
         ...state,
         errors: action.payload,

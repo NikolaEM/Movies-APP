@@ -6,8 +6,12 @@ import movieService from "../../services/Movies/MovieService";
 import {
   createMovieSuccess,
   createMovieError,
-  loadGenresSuccess,
-  loadGenresError,
+  setGenresSuccess,
+  getGenresError,
+  getMoviesError,
+  setMoviesSuccess,
+  setMovieSuccess,
+  getMovieError,
 } from "../actions/MoviesActions";
 
 export function* onCreateMovie(action) {
@@ -20,12 +24,29 @@ export function* onCreateMovie(action) {
   }
 }
 
-export function* onLoadGenres() {
+export function* getGenres() {
   try {
     const response = yield call(movieService.getGenres);
-    yield put(loadGenresSuccess(response));
+    yield put(setGenresSuccess(response));
   } catch (error) {
-    yield put(loadGenresError(error.response.data));
+    yield put(getGenresError(error.response.data));
+  }
+}
+
+export function* getMovies() {
+  try {
+    const response = yield call(movieService.getMovies);
+    yield put(setMoviesSuccess(response));
+  } catch (error) {
+    yield put(getMoviesError(error.response.data));
+  }
+}
+export function* getMovie({ payload }) {
+  try {
+    const response = yield call(movieService.getMovie, payload);
+    yield put(setMovieSuccess(response));
+  } catch (error) {
+    yield put(getMovieError(error.response.data));
   }
 }
 
@@ -33,10 +54,23 @@ export function* watchOnCreateMovie() {
   yield takeEvery(types.CREATE_MOVIE, onCreateMovie);
 }
 
-export function* watchOnLoadGenres() {
-  yield takeEvery(types.LOAD_GENRES, onLoadGenres);
+export function* watchGetGenres() {
+  yield takeEvery(types.LOAD_GENRES, getGenres);
+}
+
+export function* watchGetMovies() {
+  yield takeEvery(types.LOAD_MOVIES, getMovies);
+}
+
+export function* watchGetMovie() {
+  yield takeEvery(types.LOAD_MOVIE, getMovie);
 }
 
 export default function* moviesSaga() {
-  yield all([fork(watchOnCreateMovie), fork(watchOnLoadGenres)]);
+  yield all([
+    fork(watchOnCreateMovie),
+    fork(watchGetGenres),
+    fork(watchGetMovies),
+    fork(watchGetMovie),
+  ]);
 }
