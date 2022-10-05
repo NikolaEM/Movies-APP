@@ -14,7 +14,7 @@ import {
 import authService from "../../services/AuthAPI/AuthService";
 import { ROUTE } from "../../views/routes";
 
-export function* onLoadUsers() {
+function* onLoadUsers() {
   try {
     const response = yield call(authService.loadUsersApi);
     if (response.status === 200) {
@@ -25,7 +25,7 @@ export function* onLoadUsers() {
   }
 }
 
-export function* onCreateUser(action) {
+function* onCreateUser(action) {
   try {
     const response = yield call(authService.createUserApi, action.payload);
     yield put(createUserSuccess(response.data));
@@ -35,7 +35,7 @@ export function* onCreateUser(action) {
   }
 }
 
-export function* onLoginUser(action) {
+function* onLoginUser(action) {
   try {
     const response = yield call(authService.loginUserApi, action.payload);
     yield put(loginUserSuccess(response.data));
@@ -47,7 +47,7 @@ export function* onLoginUser(action) {
   }
 }
 
-export function* setActiveUser() {
+function* setActiveUser() {
   try {
     const response = yield call(authService.getActiveUser);
     yield put(setActiveUser(response.data));
@@ -56,7 +56,7 @@ export function* setActiveUser() {
   }
 }
 
-export function* onLogoutUser() {
+function* onLogoutUser() {
   try {
     yield call(authService.logoutUserApi);
     yield put(logoutUserSuccess());

@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getGenres, getMovie } from "../../redux/actions/MoviesActions";
-import { selectMovie } from "../../redux/selectors/MovieSelectors";
+import { selectGenre, selectMovie } from "../../redux/selectors/MovieSelectors";
 
 const SingleMovie = () => {
   const { id } = useParams();
-  const genres = useSelector((state) => state.movies.genres);
+  const genres = useSelector(selectGenre);
   const dispatch = useDispatch();
   const movie = useSelector(selectMovie);
 

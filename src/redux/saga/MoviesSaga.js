@@ -14,7 +14,7 @@ import {
   getMovieError,
 } from "../actions/MoviesActions";
 
-export function* onCreateMovie(action) {
+function* onCreateMovie(action) {
   try {
     const response = yield call(movieService.createMovie, action.payload);
     yield put(createMovieSuccess(response.data));
@@ -24,7 +24,7 @@ export function* onCreateMovie(action) {
   }
 }
 
-export function* getGenres() {
+function* getGenres() {
   try {
     const response = yield call(movieService.getGenres);
     yield put(setGenresSuccess(response));
@@ -33,7 +33,7 @@ export function* getGenres() {
   }
 }
 
-export function* getMovies() {
+function* getMovies() {
   try {
     const response = yield call(movieService.getMovies);
     yield put(setMoviesSuccess(response));
@@ -41,7 +41,7 @@ export function* getMovies() {
     yield put(getMoviesError(error.response.data));
   }
 }
-export function* getMovie({ payload }) {
+function* getMovie({ payload }) {
   try {
     const response = yield call(movieService.getMovie, payload);
     yield put(setMovieSuccess(response));
