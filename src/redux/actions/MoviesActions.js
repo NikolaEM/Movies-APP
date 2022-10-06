@@ -28,8 +28,11 @@ export const getGenresError = (error) => ({
   payload: error,
 });
 
-export const getMovies = () => ({
+export const getMovies = (page, search, genre) => ({
   type: types.GET_MOVIES,
+  page,
+  search,
+  genre,
 });
 
 export const setMoviesSuccess = (data) => ({
@@ -55,4 +58,9 @@ export const setMovieSuccess = (data) => ({
 export const getMovieError = (error) => ({
   type: types.GET_MOVIE_ERROR,
   payload: error,
+});
+
+export const setTotalPages = (payload) => ({
+  type: types.SET_TOTAL_PAGES,
+  payload,
 });

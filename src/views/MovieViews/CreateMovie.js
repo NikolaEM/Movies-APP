@@ -3,11 +3,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createMovie, getGenres } from "../../redux/actions/MoviesActions";
+import { selectGenre } from "../../redux/selectors/MovieSelectors";
 import { createMovieSchema } from "../validation/MoviesValidation";
 
 const CreateMovie = () => {
   const dispatch = useDispatch();
-  const genres = useSelector((state) => state.movies.genres);
+  const genres = useSelector(selectGenre);
   const [movieCover, setMovieCover] = useState(null);
 
   const onSubmit = (values) => {
@@ -61,7 +62,7 @@ const CreateMovie = () => {
           </Field>
           <br></br>
           <Field name="genre" component="select" placeholder="Select genre">
-            {genres.map((genre, id) => (
+            {genres?.map((genre, id) => (
               <option key={genre.id} value={genre.id}>
                 {" "}
                 {genre.name}{" "}
