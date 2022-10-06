@@ -30,7 +30,7 @@ const SingleMovie = () => {
             alt="Not available"
           />
           <p>{movie?.description}</p>
-          {<p> {genres[movie?.genre]?.name} </p>}
+          {<p> {genres?.[movie.genre]?.name} </p>}
         </div>
       ) : (
         <div>

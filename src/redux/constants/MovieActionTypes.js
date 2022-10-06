@@ -13,3 +13,5 @@ export const GET_MOVIES_ERROR = "GET_MOVIES_ERROR";
 export const GET_MOVIE = "GET_MOVIE";
 export const SET_MOVIE_SUCCESS = "SET_MOVIE_SUCCESS";
 export const GET_MOVIE_ERROR = "GET_MOVIE_ERROR";
+
+export const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";

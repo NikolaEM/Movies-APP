@@ -1,9 +1,11 @@
 import * as types from "../constants/MovieActionTypes";
 
 const initialState = {
-  movies: [],
+  movies: {
+    data: [],
+    totalPages: 1,
+  },
   movie: null,
-  totalPages: 1,
   genres: [],
   errors: false,
 };
@@ -39,6 +41,11 @@ const moviesReducer = (state = initialState, action) => {
       return {
         ...state,
         movie: action.payload,
+      };
+    case types.SET_TOTAL_PAGES:
+      return {
+        ...state,
+        totalPages: action.payload,
       };
     case types.CREATE_MOVIE_ERROR:
     case types.GET_GENRES_ERROR:

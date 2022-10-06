@@ -16,8 +16,13 @@ class MovieService extends ApiService {
     return data;
   };
 
-  getMovies = async () => {
-    const { data } = await this.client.get(`${ENDPOINTS.MOVIES}`);
+  getMovies = async ({ page, search, genre }) => {
+    const { data } = await this.client.get(
+      `${ENDPOINTS.MOVIES}` +
+        `?page=${page}` +
+        `&search=${search}` +
+        `&genre=${genre}`
+    );
     return data;
   };
 

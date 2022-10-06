@@ -12,6 +12,7 @@ import {
   setMoviesSuccess,
   setMovieSuccess,
   getMovieError,
+  setTotalPages,
 } from "../actions/MoviesActions";
 
 function* onCreateMovie(action) {
@@ -27,15 +28,15 @@ function* onCreateMovie(action) {
 function* getGenres() {
   try {
     const response = yield call(movieService.getGenres);
-    yield put(setGenresSuccess(response));
+    yield put(setGenresSuccess(response.results));
   } catch (error) {
     yield put(getGenresError(error.response.data));
   }
 }
 
-function* getMovies() {
+function* getMovies(page, search, genre) {
   try {
-    const response = yield call(movieService.getMovies);
+    const response = yield call(movieService.getMovies, page, search, genre);
     yield put(setMoviesSuccess(response));
   } catch (error) {
     yield put(getMoviesError(error.response.data));
