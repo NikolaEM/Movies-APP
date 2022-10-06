@@ -12,7 +12,6 @@ import {
   setMoviesSuccess,
   setMovieSuccess,
   getMovieError,
-  setTotalPages,
 } from "../actions/MoviesActions";
 
 function* onCreateMovie(action) {

@@ -16,6 +16,7 @@ const Movies = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [genre, setGenre] = useState("");
+  console.log("movies", movies);
 
   useEffect(() => {
     dispatch(getMovies(page, search, genre));
