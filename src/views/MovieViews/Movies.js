@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getGenres, getMovies } from "../../redux/actions/MoviesActions";
+import {
+  getGenres,
+  getMovies,
+  likeMovie,
+  dislikeMovie,
+} from "../../redux/actions/MoviesActions";
 import {
   selectGenre,
   selectMovies,
@@ -16,7 +21,6 @@ const Movies = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [genre, setGenre] = useState("");
-  console.log("movies", movies);
 
   useEffect(() => {
     dispatch(getMovies(page, search, genre));
@@ -28,6 +32,14 @@ const Movies = () => {
 
   const handleChangeGenre = (e) => {
     setGenre(e.target.value);
+  };
+
+  const handleLikeMovie = (id) => {
+    dispatch(likeMovie(id));
+  };
+
+  const handleDislikeMovie = (id) => {
+    dispatch(dislikeMovie(id));
   };
 
   return (
@@ -48,7 +60,12 @@ const Movies = () => {
           <MovieSearch search={search} setSearch={setSearch} />
           <ul>
             {movies?.results?.map((movie) => (
-              <MovieRow key={movie.id} movie={movie} />
+              <MovieRow
+                key={movie.id}
+                movie={movie}
+                onLike={handleLikeMovie}
+                onDislike={handleDislikeMovie}
+              />
             ))}
           </ul>
           <PagesNavigation

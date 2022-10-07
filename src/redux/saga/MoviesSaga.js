@@ -50,6 +50,24 @@ function* getMovie({ payload }) {
   }
 }
 
+function* likeMovie(action) {
+  try {
+    const response = yield call(movieService.likeMovie, action.payload);
+    yield put(setMovieSuccess(response));
+  } catch (error) {
+    yield put(getMovieError(error.response.data));
+  }
+}
+
+function* dislikeMovie(action) {
+  try {
+    const response = yield call(movieService.dislikeMovie, action.payload);
+    yield put(setMovieSuccess(response));
+  } catch (error) {
+    yield put(getMovieError(error.pesponse.data));
+  }
+}
+
 export function* watchOnCreateMovie() {
   yield takeEvery(types.CREATE_MOVIE, onCreateMovie);
 }
@@ -66,11 +84,21 @@ export function* watchGetMovie() {
   yield takeEvery(types.GET_MOVIE, getMovie);
 }
 
+export function* watchLikeMovie() {
+  yield takeEvery(types.LIKE_MOVIE, likeMovie);
+}
+
+export function* watchDislikeMovie() {
+  yield takeEvery(types.DISLIKE_MOVIE, dislikeMovie);
+}
+
 export default function* moviesSaga() {
   yield all([
     fork(watchOnCreateMovie),
     fork(watchGetGenres),
     fork(watchGetMovies),
     fork(watchGetMovie),
+    fork(watchLikeMovie),
+    fork(watchDislikeMovie),
   ]);
 }
