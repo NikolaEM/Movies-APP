@@ -15,3 +15,7 @@ export const SET_MOVIE_SUCCESS = "SET_MOVIE_SUCCESS";
 export const GET_MOVIE_ERROR = "GET_MOVIE_ERROR";
 
 export const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";
+
+export const LIKE_MOVIE = "LIKE_MOVIE";
+
+export const DISLIKE_MOVIE = "DISLIKE_MOVIE";

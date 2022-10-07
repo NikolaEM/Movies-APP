@@ -64,3 +64,13 @@ export const setTotalPages = (payload) => ({
   type: types.SET_TOTAL_PAGES,
   payload,
 });
+
+export const likeMovie = (payload) => ({
+  type: types.LIKE_MOVIE,
+  payload,
+});
+
+export const dislikeMovie = (payload) => ({
+  type: types.DISLIKE_MOVIE,
+  payload,
+});

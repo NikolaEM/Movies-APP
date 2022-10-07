@@ -30,6 +30,18 @@ class MovieService extends ApiService {
     const { data } = await this.client.get(`${ENDPOINTS.MOVIES}${id}`);
     return data;
   };
+
+  likeMovie = async (id) => {
+    const { data } = await this.client.patch(`${ENDPOINTS.MOVIES}${id}/likes/`);
+    return data;
+  };
+
+  dislikeMovie = async (id) => {
+    const { data } = await this.client.patch(
+      `${ENDPOINTS.MOVIES}${id}/dislikes/`
+    );
+    return data;
+  };
 }
 
 const movieService = new MovieService();

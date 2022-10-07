@@ -4,6 +4,8 @@ const initialState = {
   movies: {
     data: [],
     totalPages: 1,
+    likes: [],
+    dislikes: [],
   },
   movie: null,
   genres: [],
