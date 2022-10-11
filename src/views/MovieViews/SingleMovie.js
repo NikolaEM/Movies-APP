@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import CreateComment from "../../components/Comments";
 import LikesDislikes from "../../components/LikesDislikes";
+import NumberOfViews from "../../components/NumberOfViews";
 import { getMovie } from "../../redux/actions/MoviesActions";
 import { selectMovie } from "../../redux/selectors/MovieSelectors";
 
@@ -12,7 +14,7 @@ const SingleMovie = () => {
 
   useEffect(() => {
     dispatch(getMovie(id));
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -28,6 +30,8 @@ const SingleMovie = () => {
           <p>{movie?.description}</p>
           {<p> {movie.genre.name} </p>}
           <LikesDislikes movie={movie} />
+          <NumberOfViews movie={movie} />
+          <CreateComment movie={movie} />
         </div>
       ) : (
         <div>

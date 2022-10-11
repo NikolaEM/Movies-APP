@@ -42,6 +42,28 @@ class MovieService extends ApiService {
     );
     return data;
   };
+
+  addComment = async ({ id, content }) => {
+    const { data } = await this.client.post(
+      `${ENDPOINTS.MOVIES}${id}/comments/`,
+      {
+        content: content,
+      }
+    );
+    return data;
+  };
+
+  getComments = async (id) => {
+    const { data } = await this.client.get(
+      `${ENDPOINTS.MOVIES}${id}/comments/`
+    );
+    return data;
+  };
+
+  getPopular = async () => {
+    const { data } = await this.client.get(`${ENDPOINTS.MOVIES}popular`);
+    return data;
+  };
 }
 
 const movieService = new MovieService();

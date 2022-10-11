@@ -9,6 +9,7 @@ import PrivateRoute from "./components/routes/PrivateRoute";
 import CreateMovie from "./views/MovieViews/CreateMovie";
 import Movies from "./views/MovieViews/Movies";
 import SingleMovie from "./views/MovieViews/SingleMovie";
+import PopularMovies from "./views/MovieViews/PopularMovies";
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
         </PrivateRoute>
         <PrivateRoute exact path={ROUTE.SINGLE_MOVIE}>
           <SingleMovie />
+        </PrivateRoute>
+        <PrivateRoute exact path={ROUTE.POPULAR}>
+          <PopularMovies />
         </PrivateRoute>
       </Switch>
     </Router>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ROUTE } from "../views/routes";
+import NumberOfViews from "./NumberOfViews";
 
 const MovieRow = ({ movie }) => {
   return (
@@ -14,6 +15,7 @@ const MovieRow = ({ movie }) => {
         alt="Not available"
       />
       <p>{movie.description}</p>
+      <NumberOfViews movie={movie} />
     </>
   );
 };

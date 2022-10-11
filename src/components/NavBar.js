@@ -30,6 +30,9 @@ export default function Navbar() {
               <Link className="nav-link" to={ROUTE.CREATE_MOVIE}>
                 Create Movie
               </Link>
+              <Link className="nav-link" to={ROUTE.POPULAR}>
+                Popular Movies
+              </Link>
 
               <button className="btn btn-secondary" onClick={handleLogout}>
                 Logout
