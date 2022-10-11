@@ -5,4 +5,5 @@ export const ROUTE = {
   DEFAULT: "/",
   MOVIES: "/movies/",
   SINGLE_MOVIE: "/movies/:id",
+  POPULAR: "/popular",
 };

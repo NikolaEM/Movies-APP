@@ -8,3 +8,11 @@ export function selectGenre(state) {
 export function selectMovie(state) {
   return state.movies.movie;
 }
+
+export function selectMovieComments(state) {
+  return state.movies.comments;
+}
+
+export function selectPopularMovies(state) {
+  return state.movies.popular;
+}

@@ -8,6 +8,8 @@ const initialState = {
   movie: null,
   genres: [],
   errors: false,
+  comments: [],
+  popular: [],
 };
 
 const moviesReducer = (state = initialState, action) => {
@@ -20,12 +22,21 @@ const moviesReducer = (state = initialState, action) => {
     case types.GET_GENRES:
     case types.GET_MOVIES:
     case types.GET_MOVIE:
+    case types.GET_COMMENTS:
+    case types.GET_POPULAR:
       return {
         ...state,
       };
     case types.CREATE_MOVIE_SUCCESS:
       return {
         ...state,
+      };
+    case types.CREATE_COMMENT_SUCCESS:
+      return {
+        ...state,
+        comments: {
+          results: [...state.comments.results, action.payload],
+        },
       };
     case types.SET_GENRES_SUCCESS:
       return {
@@ -47,10 +58,23 @@ const moviesReducer = (state = initialState, action) => {
         ...state,
         totalPages: action.payload,
       };
+    case types.SET_COMMENTS_SUCCESS:
+      return {
+        ...state,
+        comments: action.payload,
+      };
+    case types.SET_POPULAR_SUCCESS:
+      return {
+        ...state,
+        popular: action.payload,
+      };
     case types.CREATE_MOVIE_ERROR:
     case types.GET_GENRES_ERROR:
     case types.GET_MOVIES_ERROR:
     case types.GET_MOVIE_ERROR:
+    case types.CREATE_COMMENT_ERROR:
+    case types.GET_COMMENTS_ERROR:
+    case types.GET_POPULAR_ERROR:
       return {
         ...state,
         errors: action.payload,

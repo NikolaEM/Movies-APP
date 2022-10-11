@@ -12,6 +12,12 @@ import {
   setMoviesSuccess,
   setMovieSuccess,
   getMovieError,
+  createCommentSuccess,
+  createCommentError,
+  getCommentsError,
+  setComments,
+  setPopular,
+  getPopularError,
 } from "../actions/MoviesActions";
 
 function* onCreateMovie(action) {
@@ -64,7 +70,34 @@ function* dislikeMovie(action) {
     const response = yield call(movieService.dislikeMovie, action.payload);
     yield put(setMovieSuccess(response));
   } catch (error) {
-    yield put(getMovieError(error.pesponse.data));
+    yield put(getMovieError(error.response.data));
+  }
+}
+
+function* createMovieComment(action) {
+  try {
+    const response = yield call(movieService.addComment, action.payload);
+    yield put(createCommentSuccess(response));
+  } catch (error) {
+    yield put(createCommentError(error.response.data));
+  }
+}
+
+function* getComments(action) {
+  try {
+    const response = yield call(movieService.getComments, action.payload);
+    yield put(setComments(response));
+  } catch (error) {
+    yield put(getCommentsError(error.response.data));
+  }
+}
+
+function* getPopular(action) {
+  try {
+    const response = yield call(movieService.getPopular, action.payload);
+    yield put(setPopular(response));
+  } catch (error) {
+    yield put(getPopularError(error.response.data));
   }
 }
 
@@ -92,6 +125,18 @@ export function* watchDislikeMovie() {
   yield takeEvery(types.DISLIKE_MOVIE, dislikeMovie);
 }
 
+export function* watchCreateMovieComment() {
+  yield takeEvery(types.CREATE_COMMENT, createMovieComment);
+}
+
+export function* watchGetComments() {
+  yield takeEvery(types.GET_COMMENTS, getComments);
+}
+
+export function* watchGetPopular() {
+  yield takeEvery(types.GET_POPULAR, getPopular);
+}
+
 export default function* moviesSaga() {
   yield all([
     fork(watchOnCreateMovie),
@@ -100,5 +145,8 @@ export default function* moviesSaga() {
     fork(watchGetMovie),
     fork(watchLikeMovie),
     fork(watchDislikeMovie),
+    fork(watchCreateMovieComment),
+    fork(watchGetComments),
+    fork(watchGetPopular),
   ]);
 }

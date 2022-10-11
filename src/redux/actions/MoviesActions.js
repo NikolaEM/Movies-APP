@@ -74,3 +74,48 @@ export const dislikeMovie = (payload) => ({
   type: types.DISLIKE_MOVIE,
   payload,
 });
+
+export const createComment = (comment) => ({
+  type: types.CREATE_COMMENT,
+  payload: comment,
+});
+
+export const createCommentSuccess = (payload) => ({
+  type: types.CREATE_COMMENT_SUCCESS,
+  payload,
+});
+
+export const createCommentError = (error) => ({
+  type: types.CREATE_COMMENT_ERROR,
+  payload: error,
+});
+
+export const getComments = (payload) => ({
+  type: types.GET_COMMENTS,
+  payload,
+});
+
+export const setComments = (payload) => ({
+  type: types.SET_COMMENTS_SUCCESS,
+  payload,
+});
+
+export const getCommentsError = (error) => ({
+  type: types.GET_COMMENTS_ERROR,
+  payload: error,
+});
+
+export const getPopular = (payload) => ({
+  type: types.GET_POPULAR,
+  payload,
+});
+
+export const setPopular = (payload) => ({
+  type: types.SET_POPULAR_SUCCESS,
+  payload,
+});
+
+export const getPopularError = (error) => ({
+  type: types.GET_POPULAR_ERROR,
+  payload: error,
+});
