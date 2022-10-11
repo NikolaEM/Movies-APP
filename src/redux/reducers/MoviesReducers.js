@@ -19,11 +19,6 @@ const moviesReducer = (state = initialState, action) => {
         ...state,
         movie: action.payload,
       };
-    case types.CREATE_COMMENT:
-      return {
-        ...state,
-        comments: action.payload,
-      };
     case types.GET_GENRES:
     case types.GET_MOVIES:
     case types.GET_MOVIE:
@@ -33,9 +28,15 @@ const moviesReducer = (state = initialState, action) => {
         ...state,
       };
     case types.CREATE_MOVIE_SUCCESS:
+      return {
+        ...state,
+      };
     case types.CREATE_COMMENT_SUCCESS:
       return {
         ...state,
+        comments: {
+          results: [...state.comments.results, action.payload],
+        },
       };
     case types.SET_GENRES_SUCCESS:
       return {

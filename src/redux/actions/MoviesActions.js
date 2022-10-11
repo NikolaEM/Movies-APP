@@ -80,8 +80,9 @@ export const createComment = (comment) => ({
   payload: comment,
 });
 
-export const createCommentSuccess = () => ({
+export const createCommentSuccess = (payload) => ({
   type: types.CREATE_COMMENT_SUCCESS,
+  payload,
 });
 
 export const createCommentError = (error) => ({

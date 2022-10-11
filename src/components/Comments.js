@@ -8,12 +8,13 @@ import { createCommentSchema } from "../views/validation/CommentsValidation";
 
 const CreateComment = ({ movie }) => {
   const dispatch = useDispatch();
-  const { id } = useParams();
   const comments = useSelector(selectMovieComments);
 
   useEffect(() => {
-    dispatch(getComments(id));
-  }, [id]);
+    if (movie?.id) {
+      dispatch(getComments(movie?.id));
+    }
+  }, []);
 
   const onSubmit = (values) => {
     dispatch(createComment({ id: movie.id, content: values.content }));
