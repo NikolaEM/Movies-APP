@@ -19,7 +19,7 @@ const SingleMovie = () => {
   return (
     <>
       {movie?.id ? (
-        <div>
+        <div className="d-flex align-items-center d-flex flex-column">
           <p>{movie?.title}</p>
           <img
             src={movie?.movie_cover}

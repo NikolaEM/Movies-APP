@@ -5,17 +5,14 @@ import NumberOfViews from "./NumberOfViews";
 const MovieRow = ({ movie }) => {
   return (
     <>
-      <Link to={`${ROUTE.MOVIES}${movie.id}`}>
-        <p>{movie.title}</p>
-      </Link>
-      <img
-        src={movie.movie_cover}
-        width="300"
-        height="300"
-        alt="Not available"
-      />
-      <p>{movie.description}</p>
-      <NumberOfViews movie={movie} />
+      <li className="w-50 p-3">
+        <Link to={`${ROUTE.MOVIES}${movie.id}`}>
+          <p>{movie.title}</p>
+        </Link>
+        <img src={movie.movie_cover} className="mw-100" alt="Max-width 100%" />
+        <p>{movie.description}</p>
+        <NumberOfViews movie={movie} />
+      </li>
     </>
   );
 };

@@ -45,35 +45,42 @@ const Movies = () => {
   return (
     <>
       {movies?.results?.length ? (
-        <div>
-          <select
-            className="form-select"
-            aria-label="Default select example"
-            onChange={handleChangeGenre}
-          >
-            {genres?.map((genre) => (
-              <option key={genre?.id} value={genre?.id}>
-                {genre?.name}
-              </option>
-            ))}
-          </select>
-          <MovieSearch search={search} setSearch={setSearch} />
-          <ul>
-            {movies?.results?.map((movie) => (
-              <MovieRow
-                key={movie.id}
-                movie={movie}
-                onLike={handleLikeMovie}
-                onDislike={handleDislikeMovie}
-              />
-            ))}
-          </ul>
+        <>
+          <div className="d-flex flex-row justify-content-around">
+            <MovieSearch search={search} setSearch={setSearch} />
+            <div className="d-flex">
+              <h4> Search by genre</h4>
+              <select
+                className="form-select w-50 p-3"
+                aria-label="Default select example"
+                onChange={handleChangeGenre}
+              >
+                {genres?.map((genre) => (
+                  <option key={genre?.id} value={genre?.id}>
+                    {genre?.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div class="d-flex flex-column   d-flex flex-wrap">
+            <ul>
+              {movies?.results?.map((movie) => (
+                <MovieRow
+                  key={movie.id}
+                  movie={movie}
+                  onLike={handleLikeMovie}
+                  onDislike={handleDislikeMovie}
+                />
+              ))}
+            </ul>
+          </div>
           <PagesNavigation
             setPage={setPage}
             page={page}
             totalPages={movies.total_pages}
           />
-        </div>
+        </>
       ) : (
         <div>No search results found.</div>
       )}
